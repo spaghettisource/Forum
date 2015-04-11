@@ -1,0 +1,32 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Forum.Models.ForumThread>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Create a topic", "Create", new {id = ViewData["SubForumId"]})
+
+        <table>
+            @foreach(var forumthread in Model)
+            {
+                <tr>
+                    <td> @Html.ActionLink(forumthread.Title, "Details", new { id = forumthread.ForumThreadId }) </td>
+                    <td> @forumthread.CreatedOn </td>
+                    @*<td> @forumthread.User.UserName </td>*@
+
+                </tr>
+            }
+        </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</body>
+</html>

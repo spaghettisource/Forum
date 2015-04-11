@@ -1,0 +1,18 @@
+﻿@model Forum.Models.Forum
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@(String.IsNullOrEmpty(Model.ForumTitle) ? "No forum" : Model.ForumTitle )   </h2>
+
+<table>
+    @foreach (var subforum in Model.SubForum)
+    {
+        <tr>
+            <td>@Html.ActionLink(subforum.Title,"Index", "ForumThread", new {id = subforum.SubForumId }, null) </td>
+        </tr>
+
+    }
+</table>
+

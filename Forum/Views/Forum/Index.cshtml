@@ -1,0 +1,52 @@
+﻿@model List<Forum.Models.Forum>
+
+
+@*<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table>
+            @foreach (var subfroum in Model)
+            {
+                <tr>
+                    <td> @subfroum.Title </td>
+                    <td> @Html.ActionLink(subfroum.Title, "Index","ForumThread", new { id = subfroum.SubForumId},null)  </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</body>
+</html>*@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table>
+            @foreach (var forum in Model)
+            {
+                <tr><td>@Html.ActionLink(forum.ForumTitle, "Details", new { id = forum.ForumId }) </td></tr>
+                    foreach (var subforum in forum.SubForum)
+                    {
+                        <tr><td>@Html.ActionLink(subforum.Title, "Index", "ForumThread", new { id = subforum.SubForumId }, null)</td></tr>
+
+                    }
+
+            }
+        </table>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model Forum.Models.ThreadViewModel
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>    
+</head>
+<body>
+    <h3>@Model.Title</h3>
+    <div>
+        <table>
+            @foreach (var msg in Model.Message)
+            {
+                <tr>
+                    <td> @msg.User.UserName </td>
+                </tr>
+                <tr>
+                    <td> @msg.Created </td>
+                </tr>
+                <tr>
+                    <td> @msg.Content </td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+    <div>
+        @Html.PagedListPager(Model.Message, page => Url.Action("Details", new {page, id = Model.SubForumId}))
+    </div>    
+
+    @Html.Partial("_CreateReply", Model.ForumMessage)
+
+</body>
+</html>

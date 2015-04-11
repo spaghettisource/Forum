@@ -1,0 +1,32 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Forum.Models.Message>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@using (Html.BeginForm("Search", "Forum", FormMethod.Get))
+{
+    <input type="text" name="search" /><input type="submit" value="Search" />
+}
+
+<table>
+    <tr>
+        <th>@Html.ActionLink("Search results", "Search", new { sortBy = ViewBag.SortNameParameter, search = Request["search"] }) </th>
+    </tr>
+    @foreach (var message in Model)
+    {
+       
+        <tr>
+            <td>
+                @Html.ActionLink(message.Content , "Details", "ForumThread" , new { id = message.ForumThread.ForumThreadId }, null)
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Search", new { page, sortBy = Request["sortBy"], search = Request["search"] }))

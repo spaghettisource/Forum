@@ -1,0 +1,32 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<string>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div>
+    @using(Html.BeginForm("Index","User",FormMethod.Get))
+    {
+        <input type="text" name="search" /><input type="submit" value="Search"/>
+    }
+
+
+    <table>
+        <tr>
+            <th>@Html.ActionLink("Username","Index", new { sortBy = ViewBag.SortNameParameter, search = Request["search"] }) </th>            
+        </tr>
+        @foreach (var username in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(username, "Details", new { username })
+                </td>
+            </tr>
+        }            
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortBy = Request["sortBy"], search = Request["search"] }))
+</div>
