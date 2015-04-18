@@ -23,9 +23,11 @@ namespace Forum.Models
     {
         public int SubForumId { get; set; }
         public string Title { get; set; }
+        public bool Visible { get; set; }
         
         public virtual List<ForumThread> ForumThreadId { get; set; }
         public virtual Forum Forum { get; set; }
+
     }
 
     public class ForumThread
